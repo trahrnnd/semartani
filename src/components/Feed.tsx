@@ -5,7 +5,7 @@ import { prisma } from '@/prisma'
 const Feed = async () => {
   const posts = await prisma.post.findMany();
   return (
-    <div className="">
+    <div className="mt-5 bg-white rounded-2xl">
       {posts.map((post) => (
         <div key={post.id}>
           <Post />

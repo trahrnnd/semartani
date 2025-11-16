@@ -33,9 +33,9 @@ const Post = async ({ type }: {type?: "status" | "comment"}) => {
   // console.log(fileDetails);
 
   return (
-    <div className="p-4 border-y-[1px] border-gray-100">
+    <div className="p-4 border-y-[1px] border-gray-50">
       {/* REPOST SIGN */}
-      <div className="flex items-center gap-2 text-sm text-gray-400 mb-2 from-bold">
+      <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"

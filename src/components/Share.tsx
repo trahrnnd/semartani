@@ -27,7 +27,7 @@ const Share = () => {
 
     return (
         <form
-            className="p-4 flex gap-4"
+            className="p-5 bg-white rounded-2xl flex gap-4"
             action={(formData) => shareAction(formData, settings)}
         >
             {/* AVATAR */}

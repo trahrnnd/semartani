@@ -3,12 +3,12 @@ import NextImage from 'next/image'
 
 const PopularTags = () => {
   return (
-    <div className="p-4 rounded-2xl border-[1px] border-gray-100 flex flex-col gap-4">
+    <div className="p-5 rounded-2xl bg-white flex flex-col gap-4">
         <h1 className="text-xl font-bold text-black">
-            {"What's"} Happening
+            Trending Topics
         </h1>
         {/* TREND */}
-        <div className="flex gap-4">
+        {/* <div className="flex gap-4">
             <div className="relative w-20 h-20 rounded-xl overflow-hidden">
                 <NextImage 
                     src="/general/event.png"
@@ -23,7 +23,7 @@ const PopularTags = () => {
                 </h2>
                 <span className="text-sm text-gray-500">Last night</span>
             </div>
-        </div>
+        </div> */}
         {/* TOPICS */}
         <div className="">
             <div className="flex items-center justify-between">

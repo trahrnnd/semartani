@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import NextImage from 'next/image';
-import Image from './Image';
+import React from "react";
+import Link from "next/link";
+import NextImage from "next/image";
+import Image from "./Image";
 
 const menuList = [
   {
@@ -20,19 +20,15 @@ const menuList = [
     id: 3,
     name: "Marketplace",
     link: "/marketplace",
-    icon: "/icons/job.svg"
+    icon: "/icons/job.svg",
   },
-]
+];
 
 const LeftBar = () => {
   return (
-    <div className="h-screen sticky top-0 flex flex-col justify-between pt-2 pb-8">
+    <div className="h-[calc(100vh-80px)] overflow-y-autox sticky top-[80px] flex flex-col justify-between pt-4 pb-8">
       {/* LOGO MENU BUTTON */}
-      <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
-        {/* LOGO */}
-        <Link href="/" className="p-2 rounded-full hover:bg-[#181818] ">
-          <Image path="icons/logo.svg" alt="logo" w={24} h={24} />
-        </Link>
+      <div className="flex flex-col gap-4 text-lg p-5 items-center xxl:items-start bg-white rounded-2xl">
         {/* MENU LIST */}
         <div className="flex flex-col gap-4">
           {menuList.map((item) => (
@@ -66,20 +62,25 @@ const LeftBar = () => {
         </Link>
       </div>
       {/* USER */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between cursor-pointer bg-white rounded-full p-4">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">
-            <Image path="default-image.jpg" alt="gwe" w={100} h={100} tr={true} />
+            <Image
+              path="default-image.jpg"
+              alt="gwe"
+              w={100}
+              h={100}
+              tr={true}
+            />
           </div>
           <div className="hidden xxl:flex flex-col">
             <span className="font-bold">gwe</span>
             <span className="text-sm text-textGray">@yttaygy</span>
           </div>
         </div>
-        <div className="hidden xxl:block cursor-pointer font-bold">...</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LeftBar
+export default LeftBar;

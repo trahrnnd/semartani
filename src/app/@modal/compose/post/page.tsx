@@ -22,7 +22,7 @@ const PostModal = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen h-screen top-0 left-0 z-20 bg-[#293139a6] flex justify-center">
+    <div className="absolute w-screen h-screen top-[80px] left-0 z-20 bg-[#293139a6] flex justify-center">
       <div className="py-4 px-8 rounded-xl bg-white w-[600px] h-max mt-12">
         {/* TOP */}
         <div className="flex items-center justify-between">
