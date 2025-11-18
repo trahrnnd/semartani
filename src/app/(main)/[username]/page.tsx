@@ -7,14 +7,14 @@ const UserPage = () => {
   return (
     <div className="">
         {/* PROFILE TITLE */}
-        <div className="flex items-center gap-8 sticky top-0 backdrop-blur-lg p-4 z-10 bg-[#FFFFFF84]">
+        <div className="flex items-center gap-8 sticky top-[80px] backdrop-blur-lg p-4 z-40 bg-[#FFFFFFcc]">
             <Link href="/">
                 <NextImage src="/icons/back.svg" alt="back" width={24} height={24} />
             </Link>
             <h1 className="font-bold text-lg">Lama Dev</h1>
         </div>
         {/* INFO */}
-        <div className="">
+        <div className="bg-white rounded-2xl h-full">
             {/* COVER & AVATAR CONTAINER */}
             <div className="relative w-full">
                 {/* COVER */}

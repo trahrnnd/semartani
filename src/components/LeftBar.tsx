@@ -26,9 +26,9 @@ const menuList = [
 
 const LeftBar = () => {
   return (
-    <div className="h-[calc(100vh-80px)] overflow-y-autox sticky top-[80px] flex flex-col justify-between pt-4 pb-8">
+    <div className="h-[calc(100vh-80px)] sticky top-[90px] flex flex-col justify-between pt-2 pb-8">
       {/* LOGO MENU BUTTON */}
-      <div className="flex flex-col gap-4 text-lg p-5 items-center xxl:items-start bg-white rounded-2xl">
+      <div className="flex flex-col gap-4 text-lg p-4 items-center xxl:items-start bg-white rounded-2xl">
         {/* MENU LIST */}
         <div className="flex flex-col gap-4">
           {menuList.map((item) => (
@@ -56,7 +56,7 @@ const LeftBar = () => {
         </Link>
         <Link
           href="/compose/post"
-          className="hidden xxl:block bg-green-600 text-white rounded-full font-bold py-2 px-20"
+          className="hidden xxl:block hover:bg-[#81b13d] bg-primaryAccent text-white rounded-full font-bold py-2 px-20"
         >
           Post
         </Link>

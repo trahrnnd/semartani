@@ -22,7 +22,7 @@ const PostModal = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen h-screen top-[80px] left-0 z-20 bg-[#293139a6] flex justify-center">
+    <div className="fixed inset-0 z-[60] bg-[#293139a6] flex justify-center overflow-y-auto">
       <div className="py-4 px-8 rounded-xl bg-white w-[600px] h-max mt-12">
         {/* TOP */}
         <div className="flex items-center justify-between">
@@ -32,7 +32,7 @@ const PostModal = () => {
           >
             ✕
           </div>
-          <div className="text-blue-400 font-bold">Drafts</div>
+          <div className="text-secondaryAccent font-bold">Drafts</div>
         </div>
         {/* CENTER */}
         <div className="py-8 flex gap-4">
@@ -46,7 +46,7 @@ const PostModal = () => {
           />
         </div>
         {/* BOTTOM */}
-        <div className="flex items-center justify-between gap-4 flex-wrap border-t border-gray-400 pt-4">
+        <div className="flex items-center justify-between gap-4 flex-wrap border-t border-gray pt-4">
           <div className="flex gap-4 flex-wrap">
             <NextImage
               src="icons/image.svg"
@@ -91,7 +91,7 @@ const PostModal = () => {
               className="cursor-pointer"
             />
           </div>
-          <button className="py-2 px-5 text-white bg-green-600 rounded-full font-bold">
+          <button className="py-2 px-5 text-white bg-primaryAccent rounded-full font-bold">
             Post
           </button>
         </div>

@@ -5,7 +5,7 @@ import Search from "./Search";
 const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-start gap-5 px-14 py-3">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-start gap-5 px-[70px] py-3">
         <Link href="/">
           <NextImage 
             src="/general/logo.svg"

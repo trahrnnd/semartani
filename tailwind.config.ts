@@ -21,6 +21,8 @@ export default {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			iconGreen: '#00ba7c',
+			primaryAccent: '#8fc544',
+			secondaryAccent: '#F2C94C',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'

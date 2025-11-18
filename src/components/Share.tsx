@@ -114,7 +114,7 @@ const Share = () => {
                                 className="cursor-pointer"
                             />
                         </label>
-                        <NextImage
+                        {/* <NextImage
                             src="/icons/gif.svg"
                             alt=""
                             width={20}
@@ -148,9 +148,9 @@ const Share = () => {
                             width={20}
                             height={20}
                             className="cursor-pointer"
-                        />
+                        /> */}
                     </div>
-                    <button className="bg-green-600 text-white font-bold rounded-full py-2 px-4">
+                    <button className="bg-primaryAccent hover:bg-[#81b13d] text-white font-bold rounded-full py-2 px-4">
                         Post
                     </button>
                 </div>
