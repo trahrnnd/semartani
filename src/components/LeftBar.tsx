@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import Image from "./Image";
+import { SignOutButton } from "@clerk/nextjs";
 
 const menuList = [
   {
@@ -26,7 +27,7 @@ const menuList = [
 
 const LeftBar = () => {
   return (
-    <div className="h-[calc(100vh-80px)] sticky top-[90px] flex flex-col justify-between pt-2 pb-8">
+    <div className="h-[calc(100vh-80px)] sticky top-[90px] flex flex-col justify-between pt-2 pb-8 overflow-y-auto">
       {/* LOGO MENU BUTTON */}
       <div className="flex flex-col gap-4 text-lg p-4 items-center xxl:items-start bg-white rounded-2xl">
         {/* MENU LIST */}
@@ -62,6 +63,7 @@ const LeftBar = () => {
         </Link>
       </div>
       {/* USER */}
+      <SignOutButton />
       <div className="flex items-center justify-between cursor-pointer bg-white rounded-full p-4">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">

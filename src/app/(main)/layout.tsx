@@ -16,7 +16,7 @@ export default function MainLayout({
         <div className="">
           <LeftBar />
         </div>  
-        <div className="flex-[2] md:mx-9 lg:min-w-[600px]">
+        <div className="md:mx-9 lg:min-w-[600px]">
           {children}
           {modal}
         </div>

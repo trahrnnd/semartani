@@ -17,11 +17,13 @@ const Feed = async () => {
           _count: { select: { likes: true, comments: true, rePosts: true } },
           likes: { where: { userId: userId }, select: { id: true } },
           rePosts: { where: { userId: userId }, select: { id: true } },
+          saves: { where: { userId: userId }, select: { id: true } },
         },
       },
       _count: { select: { likes: true, comments: true, rePosts: true } },
       likes: { where: { userId: userId }, select: { id: true } },
       rePosts: { where: { userId: userId }, select: { id: true } },
+      saves: { where: { userId: userId }, select: { id: true } },
     },
   });
   return (

@@ -9,7 +9,9 @@ export default function AppLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>{children}</body>
+        <body className="w-screen min-h-screen">
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

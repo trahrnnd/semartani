@@ -32,10 +32,12 @@ type PostWithDetails = PostType & {
     _count: { likes: number; comments: number; rePost: number };
     likes: { id: number }[];
     rePosts: { id: number }[];
+    saves: { id: number }[];
   };
   _count: { likes: number; comments: number; rePost: number };
   likes: { id: number }[];
   rePosts: { id: number }[];
+  saves: { id: number }[];
 };
 
 const Post = async ({
@@ -78,28 +80,31 @@ const Post = async ({
             alt=""
             w={100}
             h={100}
+            tr={true}
           />
         </div>
         {/* CONTENT */}
         <div className="flex-1 flex flex-col gap-2">
           {/* TOP */}
           <div className="w-full flex justify-between">
-            <Link href={`/`} className="flex gap-4">
-              {post.user.img && (
-                <div
-                  className={`${
-                    type !== "status" && "hidden"
-                  } relative w-10 h-10 rounded-full overflow-hidden`}
-                >
-                  <Image
-                    path={originalPost.user.img}
-                    alt=""
-                    w={100}
-                    h={100}
-                    tr={true}
-                  />
-                </div>
-              )}
+            <Link
+              href={`/${originalPost.user.username}`}
+              className="flex gap-4"
+            >
+              <div
+                className={`${
+                  type !== "status" && "hidden"
+                } relative w-10 h-10 rounded-full overflow-hidden`}
+              >
+                <Image
+                  path={originalPost.user.img || "general/noAvatar.png"}
+                  alt=""
+                  w={100}
+                  h={100}
+                  tr={true}
+                />
+              </div>
+
               <div
                 className={`flex items-center gap-2 flex-wrap ${
                   type === "status" && "flex-col gap-0 !items-start"
@@ -123,7 +128,9 @@ const Post = async ({
             <PostInfo />
           </div>
           {/* TEXT & MEDIA */}
-          <Link href={`/gwe/status/123`}>
+          <Link
+            href={`/${originalPost.user.username}/status/${originalPost.id}`}
+          >
             <p className={`${type === "status" && "text-lg"}`}>
               {originalPost.desc}
             </p>
@@ -144,7 +151,7 @@ const Post = async ({
             count={originalPost._count}
             isLiked={!!originalPost.likes.length}
             isRePosted={!!originalPost.rePosts.length}
-            
+            isSaved={!!originalPost.saves.length}
           />
         </div>
       </div>
