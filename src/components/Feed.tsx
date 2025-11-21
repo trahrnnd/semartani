@@ -9,6 +9,7 @@ const Feed = async () => {
   if (!userId) return;
 
   const posts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
     include: {
       user: { select: { displayName: true, username: true, img: true } },
       rePost: {
@@ -30,7 +31,7 @@ const Feed = async () => {
     <div className="mt-5 bg-white rounded-2xl">
       {posts.map((post) => (
         <div key={post.id}>
-          <Post post={post} user={post.user} />
+          <Post post={post} />
         </div>
       ))}
     </div>

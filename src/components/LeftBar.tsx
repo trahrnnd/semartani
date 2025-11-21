@@ -3,6 +3,7 @@ import Link from "next/link";
 import NextImage from "next/image";
 import Image from "./Image";
 import { SignOutButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
 const menuList = [
   {
@@ -25,9 +26,11 @@ const menuList = [
   },
 ];
 
-const LeftBar = () => {
+const LeftBar = async () => {
+  const user = await currentUser();
+
   return (
-    <div className="h-[calc(100vh-80px)] sticky top-[90px] flex flex-col justify-between pt-2 pb-8 overflow-y-auto">
+    <div className="h-[calc(100vh-80px)] sticky top-[80px] flex flex-col justify-between pt-4 pb-8">
       {/* LOGO MENU BUTTON */}
       <div className="flex flex-col gap-4 text-lg p-4 items-center xxl:items-start bg-white rounded-2xl">
         {/* MENU LIST */}
@@ -68,8 +71,8 @@ const LeftBar = () => {
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">
             <Image
-              path="default-image.jpg"
-              alt="gwe"
+              src={user?.imageUrl}
+              alt=""
               w={100}
               h={100}
               tr={true}
@@ -77,7 +80,7 @@ const LeftBar = () => {
           </div>
           <div className="hidden xxl:flex flex-col">
             <span className="font-bold">gwe</span>
-            <span className="text-sm text-textGray">@yttaygy</span>
+            <span className="text-sm text-gray-500">@yttaygy</span>
           </div>
         </div>
       </div>

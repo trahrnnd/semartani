@@ -1,46 +1,32 @@
-import NextImage from "next/image";
-import Image from "@/components/Image";
+import { imagekit } from "@/utils";
+import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
 import Video from "./Video";
 import Link from "next/link";
-import { imagekit } from "@/utils";
 import { Post as PostType } from "@prisma/client";
 import { format } from "timeago.js";
 
-// interface FileDetailsResponse {
-//   width: number;
-//   height: number;
-//   filePath: string;
-//   url: string;
-//   fileType: string;
-//   customMetadata?: { sensitive: boolean };
-// }
+type UserSummary = {
+  displayName: string | null;
+  username: string;
+  img: string | null;
+};
 
-type PostWithDetails = PostType & {
-  user: {
-    displayName: string;
-    username: string;
-    img: string | null;
-  };
-  rePost?: PostType & {
-    user: {
-      displayName: string;
-      username: string;
-      img: string | null;
-    };
-    _count: { likes: number; comments: number; rePost: number };
-    likes: { id: number }[];
-    rePosts: { id: number }[];
-    saves: { id: number }[];
-  };
-  _count: { likes: number; comments: number; rePost: number };
+type Engagement = {
+  _count: { likes: number; rePosts: number; comments: number };
   likes: { id: number }[];
   rePosts: { id: number }[];
   saves: { id: number }[];
 };
 
-const Post = async ({
+type PostWithDetails = PostType &
+  Engagement & {
+    user: UserSummary;
+    rePost?: (PostType & Engagement & { user: UserSummary }) | null;
+  };
+
+const Post = ({
   type,
   post,
 }: {
@@ -48,11 +34,12 @@ const Post = async ({
   post: PostWithDetails;
 }) => {
   const originalPost = post.rePost || post;
+
   return (
-    <div className="p-4 border-y-[1px] border-gray-50">
-      {/* REPOST SIGN */}
+    <div className="p-4 border-y-[1px]">
+      {/* POST TYPE */}
       {post.rePostId && (
-        <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-2 from-bold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -70,19 +57,21 @@ const Post = async ({
       {/* POST CONTENT */}
       <div className={`flex gap-4 ${type === "status" && "flex-col"}`}>
         {/* AVATAR */}
+
         <div
           className={`${
             type === "status" && "hidden"
           } relative w-10 h-10 rounded-full overflow-hidden`}
         >
           <Image
-            path={post.user.img || "general/noAvatar.png"}
+            path={originalPost.user.img || "general/noAvatar.png"}
             alt=""
             w={100}
             h={100}
             tr={true}
           />
         </div>
+
         {/* CONTENT */}
         <div className="flex-1 flex flex-col gap-2">
           {/* TOP */}
@@ -104,7 +93,6 @@ const Post = async ({
                   tr={true}
                 />
               </div>
-
               <div
                 className={`flex items-center gap-2 flex-wrap ${
                   type === "status" && "flex-col gap-0 !items-start"
@@ -114,12 +102,12 @@ const Post = async ({
                   {originalPost.user.displayName}
                 </h1>
                 <span
-                  className={`text-gray-400 ${type === "status" && "text-sm"}`}
+                  className={`text-gray-500 ${type === "status" && "text-sm"}`}
                 >
                   @{originalPost.user.username}
                 </span>
                 {type !== "status" && (
-                  <span className="text-gray-400">
+                  <span className="text-gray-500">
                     {format(originalPost.createdAt)}
                   </span>
                 )}
@@ -136,18 +124,30 @@ const Post = async ({
             </p>
           </Link>
           {originalPost.img && (
-            <Image
-              path={originalPost.img}
-              alt=""
-              w={600}
-              h={600}
-              className="rounded-xl"
-            />
+            <div className="overflow-hidden">
+              <Image
+                path={originalPost.img}
+                alt=""
+                w={600}
+                h={originalPost.imgHeight || 600}
+                className={`${originalPost.isSensitive ? "blur-3xl" : ""} rounded-2xl`}
+              />
+            </div>
+          )}
+          {originalPost.video && (
+            <div className="rounded-lg overflow-hidden">
+              <Video
+                path={originalPost.video}
+                className={originalPost.isSensitive ? "blur-3xl" : ""}
+              />
+            </div>
           )}
           {type === "status" && (
-            <span className="text-gray-500">8:41 PM · Dec 5, 2024</span>
+            <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
           )}
           <PostInteractions
+            // username={originalPost.user.username}
+            postId={originalPost.id}
             count={originalPost._count}
             isLiked={!!originalPost.likes.length}
             isRePosted={!!originalPost.rePosts.length}

@@ -24,10 +24,12 @@
         "next": "15.1.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "svix": "^1.81.0",
         "tailwind-merge": "^3.4.0",
         "tailwindcss-animate": "^1.0.7",
         "timeago.js": "^4.0.2",
-        "ts-node": "^10.9.2"
+        "ts-node": "^10.9.2",
+        "zod": "^4.1.12"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
