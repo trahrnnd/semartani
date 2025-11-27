@@ -2,8 +2,9 @@ import React from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import Image from "./Image";
-import { SignOutButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import Notification from "./Notification";
+import Logout from "./Logout";
 
 const menuList = [
   {
@@ -19,7 +20,7 @@ const menuList = [
     icon: "/icons/explore.svg",
   },
   {
-    id: 3,
+    id: 4,
     name: "Marketplace",
     link: "/marketplace",
     icon: "/icons/job.svg",
@@ -35,20 +36,26 @@ const LeftBar = async () => {
       <div className="flex flex-col gap-4 text-lg p-4 items-center xxl:items-start bg-white rounded-2xl">
         {/* MENU LIST */}
         <div className="flex flex-col gap-4">
-          {menuList.map((item) => (
-            <Link
-              href={item.link}
-              className="p-2 rounded-full hover:bg-gray-200 flex items-center gap-4"
-              key={item.id}
-            >
-              <NextImage
-                src={item.icon}
-                alt={item.name}
-                width={24}
-                height={24}
-              />
-              <span className="hidden xxl:inline">{item.name}</span>
-            </Link>
+          {menuList.map((item, i) => (
+            <React.Fragment key={item.id}>
+              {i === 2 && (
+                <div>
+                  <Notification />
+                </div>
+              )}
+              <Link
+                href={item.link}
+                className="p-2 rounded-full hover:bg-gray-200 flex items-center gap-4"
+              >
+                <NextImage
+                  src={item.icon}
+                  alt={item.name}
+                  width={24}
+                  height={24}
+                />
+                <span className="hidden xxl:inline">{item.name}</span>
+              </Link>
+            </React.Fragment>
           ))}
         </div>
         {/* BUTTON */}
@@ -65,25 +72,25 @@ const LeftBar = async () => {
           Post
         </Link>
       </div>
-      {/* USER */}
-      <SignOutButton />
-      <div className="flex items-center justify-between cursor-pointer bg-white rounded-full p-4">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 relative rounded-full overflow-hidden">
-            <Image
-              src={user?.imageUrl}
-              alt=""
-              w={100}
-              h={100}
-              tr={true}
-            />
+      {user && (
+        <>
+          {/* USER */}
+          <div className="flex items-center justify-between bg-white rounded-full p-4">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 relative rounded-full overflow-hidden">
+                <Image src={user?.imageUrl} alt="" w={100} h={100} tr={true} />
+              </div>
+              <div className="hidden xxl:flex flex-col">
+                <span className="font-bold">{user?.username}</span>
+                <span className="text-sm text-textGray">@{user?.username}</span>
+              </div>
+            </div>
+            {/* <div className="hidden xxl:block cursor-pointer font-bold">...</div> */}
+            {/* ADD LOGOUT */}
+            <Logout />
           </div>
-          <div className="hidden xxl:flex flex-col">
-            <span className="font-bold">gwe</span>
-            <span className="text-sm text-gray-500">@yttaygy</span>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

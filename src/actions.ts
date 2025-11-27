@@ -30,6 +30,29 @@ export const likePost = async (postId: number) => {
   }
 };
 
+export const followUser = async (targetUser: string) => {
+  const { userId } = await auth();
+
+  if (!userId) return;
+
+  const existingFollow = await prisma.follow.findFirst({
+    where: {
+      followerId: userId,
+      followingId: targetUser,
+    },
+  });
+
+  if (existingFollow) {
+    await prisma.follow.delete({
+      where: { id: existingFollow.id },
+    });
+  } else {
+    await prisma.follow.create({
+      data: { followerId: userId, followingId: targetUser },
+    });
+  }
+};
+
 export const rePost = async (postId: number) => {
   const { userId } = await auth();
 
@@ -214,4 +237,49 @@ export const addPost = async (
     return { success: false, error: true };
   }
   return { success: false, error: true };
+};
+
+export const searchUsers = async (query: string) => {
+  try {
+    if (!query || query.trim().length === 0) {
+      return [];
+    }
+
+    const users = await prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            username: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            displayName: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+      select: {
+        id: true,
+        username: true,
+        displayName: true,
+        img: true,
+        bio: true,
+        _count: {
+          select: {
+            followers: true,
+          },
+        },
+      },
+      take: 10,
+    });
+
+    return users;
+  } catch (error) {
+    console.error("Search error:", error);
+    throw new Error("Failed to search users");
+  }
 };

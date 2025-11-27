@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import NextImage from "next/image";
 import Image from "@/components/Image";
 import ImageEditor from "@/components/ImageEditor";
+import { useUser } from "@clerk/nextjs";
 
 const PostModal = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const PostModal = () => {
       document.body.style.overflow = "";
     };
   }, []);
+
+  const { user } = useUser();
 
   return (
     <div className="fixed inset-0 z-[60] bg-[#293139a6] flex justify-center overflow-y-auto">
@@ -37,7 +40,7 @@ const PostModal = () => {
         {/* CENTER */}
         <div className="py-8 flex gap-4">
           <div className="relative w-10 h-10 rounded-full overflow-hidden">
-            <Image path="default-image.jpg" alt="" w={100} h={100} tr={true} />
+            <Image src={user?.imageUrl} alt="" w={100} h={100} tr={true} />
           </div>
           <input
             className="flex-1 bg-transparent outline-none text-lg"
@@ -55,7 +58,7 @@ const PostModal = () => {
               height={20}
               className="cursor-pointer"
             />
-            <NextImage
+            {/* <NextImage
               src="/icons/gif.svg"
               alt=""
               width={20}
@@ -89,7 +92,7 @@ const PostModal = () => {
               width={20}
               height={20}
               className="cursor-pointer"
-            />
+            /> */}
           </div>
           <button className="py-2 px-5 text-white bg-primaryAccent rounded-full font-bold">
             Post
